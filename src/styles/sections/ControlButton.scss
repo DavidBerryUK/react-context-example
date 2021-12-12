@@ -1,0 +1,32 @@
+@import "./Colours.scss";
+
+.ui-button {
+  width: 80px;
+  height: 32px;
+  border-radius: 4px;
+  font-size: 18px;
+  margin: 4px;
+  border: solid 1px $feature-color;
+
+  &.save {
+    background: #198754;
+    border-color: #198754;
+    color: #fff;
+
+    &:hover {
+      background: darken(#198754, 5);
+      border-color: darken(#198754, 5);
+    }
+  }
+
+  &.cancel {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+
+    &:hover {
+      background: darken(#dc3545, 5);
+      border-color: darken(#dc3545, 5);
+    }
+  }
+}

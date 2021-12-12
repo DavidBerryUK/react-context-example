@@ -1,0 +1,33 @@
+@import "./Colours.scss";
+
+.ui-section {
+  border: solid 1px $feature-color;
+  background: $section-background;
+  margin: 8px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034);
+  overflow: hidden;
+
+  .ui-title {
+    background: $feature-color;
+    color: #ddd;
+    padding: 8px;
+    font-weight: bolder;
+  }
+
+  .ui-body {
+    padding: 12px;
+  }
+}
+
+.ui-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 16px;
+
+  &.right {
+    justify-content: flex-end;
+  }
+}

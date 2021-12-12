@@ -1,0 +1,25 @@
+@import "./Colours.scss";
+
+.ui-text {
+  user-select: none;
+  margin-bottom: 12px;
+
+  label {
+    font-size: 0.8em;
+    display: inline;
+    display: block;
+    text-transform: capitalize;
+    color: #666;
+    font-weight: lighter;
+    text-indent: 4px;
+  }
+  input {
+    border: solid 2px $feature-color;
+    border-radius: 6px;
+    padding: 8px;
+    display: block;
+    font-size: 18px;
+    width: 280px;
+    background: #fff;
+  }
+}
