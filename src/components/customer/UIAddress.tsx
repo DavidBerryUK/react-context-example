@@ -1,16 +1,28 @@
-import React, { useState } from "react";
 import { useCustomerContext } from "../../contexts/customer/CustomerContext";
-import UIButtonCancel from "../controls/UIButtonCancel";
+import CommandSetAddress from "../../contexts/customer/commands/CommandSetAddress";
+import React, { useState } from "react";
+import UIButtonRestore from "../controls/UIButtonRestore";
 import UIButtonSave from "../controls/UIButtonSave";
-import UIText from "../controls/UIText";
 import UIColumn from "../layout/UIColumn";
 import UIRow from "../layout/UIRow";
 import UISection from "../layout/UISection";
+import UIText from "../controls/UIText";
 
+// Display Customer Address
+//
+// The address is stored in local state, initially copied from the customer context
+// * The address may be saved to the context by pressing SAVE
+// * The address may be restored from the context by pressing RESTORE
+//
 const UIAddress: React.FC = () => {
-  const { state: customerState } = useCustomerContext();
+  // get access to the customer context
+  const { state: customerState, dispatch: customerDispatch } = useCustomerContext();
+  // local state management
   const [address, setAddress] = useState(customerState.address);
 
+  //
+  // Event Handlers
+  //
   const handleLine1Changed = (value: string) => {
     setAddress({ ...address, line1: value });
   };
@@ -26,11 +38,16 @@ const UIAddress: React.FC = () => {
   const handlePostcodeChanged = (value: string) => {
     setAddress({ ...address, postCode: value });
   };
-  const handleSaveClicked = () => {};
-  const handleCancelClicked = () => {
+  const handleSaveClicked = () => {
+    // update customer state with customer address
+    customerDispatch(new CommandSetAddress(address.line1, address.line2, address.line3, address.line4, address.postCode));
+  };
+  const handleRestoreClicked = () => {
+    // restore customer address from customer context
     setAddress(customerState.address);
   };
 
+  // note: No CSS classes in high level UI Components
   return (
     <UISection title="Address">
       <UIRow>
@@ -55,7 +72,7 @@ const UIAddress: React.FC = () => {
         </UIColumn>
       </UIRow>
       <UIRow alignRight>
-        <UIButtonCancel onClick={handleCancelClicked} />
+        <UIButtonRestore onClick={handleRestoreClicked} />
         <UIButtonSave onClick={handleSaveClicked} />
       </UIRow>
     </UISection>

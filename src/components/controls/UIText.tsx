@@ -1,5 +1,10 @@
 import React from "react";
 
+//
+// Text Input
+//
+// displays a label and text input box
+//
 interface IProperties {
   label: string;
   value: string;

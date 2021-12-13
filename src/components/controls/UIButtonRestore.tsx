@@ -1,10 +1,13 @@
 import React from "react";
 
+//
+// Restore Button
+//
 interface IProperties {
   onClick?: () => void;
 }
 
-const UIButtonCancel: React.FC<IProperties> = (props) => {
+const UIButtonRestore: React.FC<IProperties> = (props) => {
   const handleOnClickEvent = (event: React.MouseEvent) => {
     if (props.onClick) {
       props.onClick();
@@ -12,10 +15,10 @@ const UIButtonCancel: React.FC<IProperties> = (props) => {
   };
 
   return (
-    <button className="ui-button cancel" onClick={handleOnClickEvent}>
-      Cancel
+    <button className="ui-button restore" onClick={handleOnClickEvent}>
+      Restore
     </button>
   );
 };
 
-export default UIButtonCancel;
+export default UIButtonRestore;

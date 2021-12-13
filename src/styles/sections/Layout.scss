@@ -1,17 +1,17 @@
 @import "./Colours.scss";
 
 .ui-section {
-  border: solid 1px $feature-color;
+  border: solid 2px $feature-color;
   background: $section-background;
   margin: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 20px;
   border-radius: 6px;
-  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 
   .ui-title {
     background: $feature-color;
-    color: #ddd;
+    color: #fff;
     padding: 8px;
     font-weight: bolder;
   }

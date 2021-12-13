@@ -1,16 +1,28 @@
 import { useCustomerContext } from "../../contexts/customer/CustomerContext";
+import CommandSetPhone from "../../contexts/customer/commands/CommandSetPhone";
 import React, { useState } from "react";
-import UIButtonCancel from "../controls/UIButtonCancel";
+import UIButtonRestore from "../controls/UIButtonRestore";
 import UIButtonSave from "../controls/UIButtonSave";
 import UIColumn from "../layout/UIColumn";
 import UIRow from "../layout/UIRow";
 import UISection from "../layout/UISection";
 import UIText from "../controls/UIText";
 
+// Display Customer Phone
+//
+// The phone is stored in local state, initially copied from the customer context
+// * The phone may be saved to the context by pressing SAVE
+// * The phone may be restored from the context by pressing RESTORE
+//
 const UIPhone: React.FC = () => {
-  const { state: customerState } = useCustomerContext();
+  // get access to the customer context
+  const { state: customerState, dispatch: customerDispatch } = useCustomerContext();
+  // local state management
   const [phone, setPhone] = useState(customerState.phone);
 
+  //
+  // Event Handlers
+  //
   const handleHomeChanged = (value: string) => {
     setPhone({ ...phone, home: value });
   };
@@ -20,11 +32,16 @@ const UIPhone: React.FC = () => {
   const handleMobileChanged = (value: string) => {
     setPhone({ ...phone, mobile: value });
   };
-  const handleSaveClicked = () => {};
-  const handleCancelClicked = () => {
+  const handleSaveClicked = () => {
+    // update customer state with customer phone number
+    customerDispatch(new CommandSetPhone(phone.work, phone.home, phone.mobile));
+  };
+  const handleRestoreClicked = () => {
+    // restore customer phone from customer context
     setPhone(customerState.phone);
   };
 
+  // note: No CSS classes in high level UI Components
   return (
     <UISection title="Phone Numbers">
       <UIRow>
@@ -39,7 +56,7 @@ const UIPhone: React.FC = () => {
         </UIColumn>
       </UIRow>
       <UIRow alignRight>
-        <UIButtonCancel onClick={handleCancelClicked} />
+        <UIButtonRestore onClick={handleRestoreClicked} />
         <UIButtonSave onClick={handleSaveClicked} />
       </UIRow>
     </UISection>

@@ -1,3 +1,6 @@
+//
+// Customer Name Data Model
+//
 export default class NameModel {
   title: string;
   forename: string;
@@ -7,13 +10,5 @@ export default class NameModel {
     this.title = "";
     this.forename = "";
     this.surname = "";
-  }
-
-  static testData(): NameModel {
-    var model = new NameModel();
-    model.title = "Mr";
-    model.forename = "John";
-    model.surname = "Higgs";
-    return model;
   }
 }

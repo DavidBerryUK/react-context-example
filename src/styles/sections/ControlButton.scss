@@ -7,26 +7,27 @@
   font-size: 18px;
   margin: 4px;
   border: solid 1px $feature-color;
+  cursor: pointer;
 
   &.save {
-    background: #198754;
-    border-color: #198754;
-    color: #fff;
+    background: $button-save-background;
+    border-color: $button-save-border;
+    color: $button-save-text;
 
     &:hover {
-      background: darken(#198754, 5);
-      border-color: darken(#198754, 5);
+      background: darken($button-save-background, 5);
+      border-color: darken($button-save-border, 5);
     }
   }
 
-  &.cancel {
-    background: #dc3545;
-    border-color: #dc3545;
-    color: #fff;
+  &.restore {
+    background: $button-restore-background;
+    border-color: $button-restore-border;
+    color: $button-restore-text;
 
     &:hover {
-      background: darken(#dc3545, 5);
-      border-color: darken(#dc3545, 5);
+      background: darken($button-restore-background, 5);
+      border-color: darken($button-restore-border, 5);
     }
   }
 }

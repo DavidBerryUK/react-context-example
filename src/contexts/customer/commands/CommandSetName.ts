@@ -1,11 +1,13 @@
+import { ICustomerContextProps, ICustomerContextDispatchCommand } from "../CustomerContext";
 import NameModel from "../../../models/NameModel";
-import { CustomerContextProps, ICustomerContextDispatchCommand } from "../CustomerContext";
 
 //
+// Command to update the Customer Context Name Details
+//
 export default class CommandSetName implements ICustomerContextDispatchCommand {
-  title: string;
-  forename: string;
-  surname: string;
+  readonly title: string;
+  readonly forename: string;
+  readonly surname: string;
 
   // Create the command with all data needed to update
   //  the state
@@ -17,7 +19,7 @@ export default class CommandSetName implements ICustomerContextDispatchCommand {
 
   // Update the context and return the new state
   // (this is called from within the ApplicationContext)
-  execute(state: CustomerContextProps): CustomerContextProps {
+  execute(state: ICustomerContextProps): ICustomerContextProps {
     const name = new NameModel();
     name.title = this.title;
     name.forename = this.forename;

@@ -1,26 +1,44 @@
 import { useCustomerContext } from "../../contexts/customer/CustomerContext";
+import CommandSetEmail from "../../contexts/customer/commands/CommandSetEmail";
 import React, { useState } from "react";
-import UIButtonCancel from "../controls/UIButtonCancel";
+import UIButtonRestore from "../controls/UIButtonRestore";
 import UIButtonSave from "../controls/UIButtonSave";
 import UIColumn from "../layout/UIColumn";
 import UIRow from "../layout/UIRow";
 import UISection from "../layout/UISection";
 import UIText from "../controls/UIText";
 
+// Display Customer Email
+//
+// The email is stored in local state, initially copied from the customer context
+// * The email may be saved to the context by pressing SAVE
+// * The email may be restored from the context by pressing RESTORE
+//
 const UIEmail: React.FC = () => {
-  const { state: customerState } = useCustomerContext();
+  // get access to the customer context
+  const { state: customerState, dispatch: customerDispatch } = useCustomerContext();
+  // local state management
   const [email, setEmail] = useState(customerState.email);
 
+  //
+  // Event Handlers
+  //
   const handleHomeChanged = (value: string) => {
     setEmail({ ...email, home: value });
   };
   const handleWorkChanged = (value: string) => {
     setEmail({ ...email, work: value });
   };
-  const handleSaveClicked = () => {};
-  const handleCancelClicked = () => {
+  const handleSaveClicked = () => {
+    // update customer state with customer email address
+    customerDispatch(new CommandSetEmail(email.work, email.home));
+  };
+  const handleRestoreClicked = () => {
+    // restore customer email address from customer context
     setEmail(customerState.email);
   };
+
+  // note: No CSS classes in high level UI Components
   return (
     <UISection title="Email">
       <UIRow>
@@ -32,7 +50,7 @@ const UIEmail: React.FC = () => {
         </UIColumn>
       </UIRow>
       <UIRow alignRight>
-        <UIButtonCancel onClick={handleCancelClicked} />
+        <UIButtonRestore onClick={handleRestoreClicked} />
         <UIButtonSave onClick={handleSaveClicked} />
       </UIRow>
     </UISection>
